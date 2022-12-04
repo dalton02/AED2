@@ -23,7 +23,7 @@ Hash* criar(int m,int n){
 	return tabela;
 }
 
-//FunÁ„o H(x) = x % mod 4
+//Fun√ß√£o H(x) = x % mod 4
 void inserir(Hash* tabela,int x,int y){
 	
 	int posicao = gerarHash(x,y);
@@ -69,7 +69,7 @@ void imprimir(Hash* tabela){
 	}
 	printf("\n --------------ZONA DE COLISAO------------------- \n");
 	
-	//Imprimindo zona de colis„o
+	//Imprimindo zona de colis√£o
 	i=m;
 	while(i<(m+n)){
 		printf(" %d ",tabela->valor[i]);
@@ -114,8 +114,8 @@ int gerarHash(int valor,int modulo){
 }
 
 int main(){
-	Hash* tabela = criar(3,5);	//Inserimos o tamanho da zona normal e o tamanho da zona de colis„o
-	inserir(tabela,48,4); //(Inserir tabela,Inserir valor,Inserir modulo da funÁ„o)
+	Hash* tabela = criar(3,5);	//Inserimos o tamanho da zona normal e o tamanho da zona de colis√£o
+	inserir(tabela,48,4); //(Inserir tabela,Inserir valor,Inserir modulo da fun√ß√£o)
 	inserir(tabela,49,4);
 	inserir(tabela,4,4);
 	inserir(tabela,8,4);
