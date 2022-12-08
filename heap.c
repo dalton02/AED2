@@ -4,35 +4,27 @@
 
 struct heap{
 int max;
-int pos; // Indica a posição do vetor
+int pos; // Indica a posi??o do vetor
 int* prior;	
 };
 
 typedef struct heap Heap;
 
 Heap* criar(int max,int n){
-	//Se ja tem valores no vetor temos n>0
-	
 	Heap* vetor =  (Heap*)malloc(sizeof(Heap));
 	vetor->max = max;
-	
 	vetor->pos = 0;
 	vetor->prior = (int*) malloc(max*sizeof(int));
-	
 	for(int i=n;i<max;i++){
 		vetor->prior[i] = NULL;
 	}
-	
 	return vetor;
 }
 
 
 void subir(Heap* vetor, int posicao,int x){
-	
 	vetor->prior[posicao]= x;
-	
 	int pai = posicao/2;		
-	
 	if(pai>=0){
 	
 		if(vetor->prior[posicao] > vetor->prior[pai]){
@@ -42,11 +34,9 @@ void subir(Heap* vetor, int posicao,int x){
 			subir(vetor,pai,x);
 		}
 	}		
-	
 } 
 
 void inserir(Heap* vetor, int x){
-	
 	if(vetor->pos < vetor->max){
 		
 		vetor->prior[vetor->pos] = x;
@@ -54,13 +44,10 @@ void inserir(Heap* vetor, int x){
 		vetor->pos++;
 	
 	}
-	
 }
 
 void descer(Heap* vetor,int posicao,int n){
-	
 	int filho = (2*posicao)+1;
-	
 	if(filho<n){		
 		if(filho+1 <n){
 			if(vetor->prior[filho+1] > vetor->prior[filho])
@@ -73,17 +60,14 @@ void descer(Heap* vetor,int posicao,int n){
 			}
 	}
 }
-	
 
 }
 
 
 int tamanho(Heap*vetor){
-	
 	int i=0;
 	while(vetor->prior[i]!=NULL)
-	i++;
-	
+		i++
 	return i;
 	
 }
@@ -98,23 +82,19 @@ void remocao(Heap*vetor){
 	
 }
 
-Heap* construirHeap(int* v,int n){
-	
-	
+Heap* construirHeap(int* v,int n){	
 	Heap* vetor = criar(n*2,n);
-	
 	int a=0;
 	while(a<n){
 		inserir(vetor,v[a]);
 		a++;
 	}
-		
 	return vetor;
 }
 
-int pop(Heap*vetor,int n){
+int trocas(Heap*vetor,int n){
 	if (n<=0)
-		return -1;
+	return -1;
 	int top = vetor->prior[0];
 	vetor->prior[0] = vetor->prior[n-1];
 	descer(vetor,0,n-1);
@@ -128,27 +108,26 @@ void heapsort(Heap*vetor){
 		descer(vetor,i,n);
 		i--;
 	}
-    while(n!=0){
-    	vetor->prior[n-1] = pop(vetor,n);
+	while(n!=0){
+    	vetor->prior[n-1] = trocas(vetor,n);
 		n--;
+	}
+	if(vetor->prior[1]<vetor->prior[0]){
+		int temp = vetor->prior[0];
+		vetor->prior[0] = vetor->prior[1];
+		vetor->prior[1] = temp;
 	}
 }
 
-
 void imprimir(Heap* vetor){
-	
 	vetor->pos = 0;
 	while(vetor->prior[vetor->pos] != NULL){
 		printf(" %d ",vetor->prior[vetor->pos]);
 		vetor->pos++;
 	}
-	
 }
 
 int main(){
-
-	//Criar vetor que obedece a seguinte ordem H[i/2]>=H[i]
-	
 	int heap[4] = {2,15,20,23,12};
 	Heap* vetor = construirHeap(heap,4);
 	printf("Heap formado pelo vetor acima: ");
@@ -161,7 +140,5 @@ int main(){
 	printf("\nVetor apos Heapsort: ");
 	heapsort(vetor);
 	imprimir(vetor);
-	
-	
 	return 0;
 }
